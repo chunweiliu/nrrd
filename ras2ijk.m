@@ -11,7 +11,7 @@ d = [-(s(1)*D(1,1)+C{1}) -(s(2)*D(2,2)+C{2}) C{3}]'; % original in RAS
 
 % transfrom ras 
 tmp = D\(ras-d);
-ijk = [s(1)-tmp(1) s(2)-tmp(2) tmp(3)]'; % flip the coordinates
+ijk = [s(2)-tmp(2) s(1)-tmp(1) tmp(3)]'; % flip the coordinates
 %ijk = round(ijk); % round if need
 
 end
