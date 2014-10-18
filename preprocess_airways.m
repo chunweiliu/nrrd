@@ -14,7 +14,8 @@ for i = 1:length(files)
     
     [im,meta] = nrrdread(fullfile(input_folder,subject));
     
-    [im,meta] = pad_airway(im,meta,PADDING,AIR_VAL);
+    % preprocessing
+    [im,meta] = pad_airway(im,meta,PADDING,AIR_VAL);    
     [im,meta] = filter_airway(im,meta);
     
     nrrdwrite(fullfile(output_folder,subject),im,meta);
@@ -31,7 +32,7 @@ function [im, meta] = filter_airway(im,meta)
 %FILTER_AIRWAY Filter -2048 (background) to -1024 (air)
 BACKGROUND_VAL = -2047;
 AIR_VAL = -1024;
-im((im<-BACKGROUND_VAL)) = AIR_VAL;
+im(im<BACKGROUND_VAL) = AIR_VAL;
 end
 
 
