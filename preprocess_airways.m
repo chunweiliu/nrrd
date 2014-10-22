@@ -2,12 +2,20 @@ function preprocess_airways(input_folder, output_folder)
 %PREPROCESS_AIRWAYS Apply follows preprocessing to all nrrd files in folder
 % 1. Padding
 % 2. Filterring
+% args
+% - input_folder: string, a folder contained multiple nrrd files
+% - output_folder: string, a folder contained multiple preprocessed nrrd
 
 PADDING = 40;
 AIR_VAL = -1024;
 
 FILE_EXT = '*.nrrd';
 files = dir(fullfile(input_folder,FILE_EXT));
+
+if length(files) > 1 && ~exist(output_folder,'dir')
+    mkdir(output_folder)
+end
+
 for i = 1:length(files)
     subject = files(i).name;
     fprintf('process %s\n',fullfile(input_folder,subject));
